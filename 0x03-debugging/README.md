@@ -1,2 +1,1 @@
- C - Debugging
- 
+debugging mode
