@@ -1,25 +1,62 @@
 #include "main.h"
 
-/* Solution credit goes to Arthur Damm, cohort 8. */
+/**
+ * is_palindrome -  sss
+ * @r: string
+ * Return: return something
+ */
+
+int is_palindrome(char *r)
+{
+
+	int i, size, add;
+
+	i = 0;
+	add = 0;
+
+	size = _strlen_recursion(r);
+
+	add = (size % 2 != 0) ? 2 : 1;
+
+	return (evaluate(r, i, size - 1, add));
+}
 
 /**
- * wildcmp - compares two strings and returns 1 if the strings can be
- * considered identical, otherwise return 0
- * @s1: input string1
- * @s2: input string2
- * Return: 1 if true, 0 if false
+ * evaluate - compare
+ * @i: i
+ * @size: size
+ * @s: string
+ * @add: addition depending if n is odd or even
+ * Return: return value
  */
-int wildcmp(char *s1, char *s2)
+int evaluate(char *s, int i, int size, int add)
 {
-	if (*s1 == '\0')
+
+	if (i + add == size  && s[i] == s[size])
 	{
-		if (*s2 != '\0' && *s2 == '*')
-			return (wildcmp(s1, s2 + 1));
-		return (*s2 == '\0');
+		return (1);
 	}
-	if (*s2 == '*')
-		return (wildcmp(s1 + 1, s2) || wildcmp(s1, s2 + 1));
-	else if (*s1 == *s2)
-		return (wildcmp(s1 + 1, s2 + 1));
+
+	else if (s[i] == s[size])
+	{
+		return (evaluate(s, i + 1, size - 1, add));
+	}
+
 	return (0);
+}
+
+/**
+ * _strlen_recursion - legth of a string
+ * @s: string
+ * Return: return legth
+ */
+
+int _strlen_recursion(char *s)
+{
+	/*Base condition*/
+	if (!*s)
+		return (0);
+
+	else
+		return (1 + _strlen_recursion(s + 1)); /*Sum 1*/
 }
